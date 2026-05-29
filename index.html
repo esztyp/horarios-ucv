@@ -9,20 +9,24 @@
     
     <style>
         :root {
-            --bg-main: #0f172a;
-            --bg-card: #1e293b;
-            --bg-darker: #141e30;
-            --border-color: #334155;
+            /* Nuevos colores basados en tu paleta exacta */
+            --bg-main: #0d050e;              /* Fondo Base Profundo Nocturno */
+            --bg-card: #2b193e;              /* Fondo de Tarjetas Púrpura */
+            --bg-darker: #160a22;            /* Celdas / Secciones más oscuras */
+            --border-color: #492864;         /* Bordes integrados en tonos púrpura */
             --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --primary: #a855f7;
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --accent-teoria: #6366f1;
-            --accent-practica: #10b981;
-            --badge-teoria: #1e3a8a;
-            --badge-practica: #065f46;
-            --success-bg: #064e3b;
-            --success-border: #059669;
+            --text-muted: #a38eb6;           /* Texto secundario suavizado con lavanda */
+            
+            /* Colores de Acento y Marcas */
+            --primary: #a3445d;              /* Púrpura claro / Detalles activos */
+            --primary-gradient: linear-gradient(135deg, #8d2d56 0%, #d53c3c 100%); /* Degradado Púrpura Vibrante a Coral */
+            --accent-teoria: #8d2d56;        /* Púrpura Vibrante */
+            --accent-practica: #d53c3c;      /* Coral Intenso */
+            
+            --badge-teoria: #4a152d;
+            --badge-practica: #5e1616;
+            --success-bg: #1c3d27;
+            --success-border: #10b981;
             --success-text: #34d399;
         }
 
@@ -38,7 +42,7 @@
 
         /* Navbar Responsiva */
         .navbar {
-            background-color: rgba(15, 23, 42, 0.85);
+            background-color: rgba(13, 5, 14, 0.85);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
             padding: 14px 24px;
@@ -85,13 +89,13 @@
         }
 
         .brand-badge {
-            background-color: #064e3b;
-            color: var(--success-text);
+            background-color: var(--badge-practica);
+            color: #ffffff;
             font-size: 9px;
             font-weight: 700;
             padding: 2px 6px;
             border-radius: 20px;
-            border: 1px solid var(--success-border);
+            border: 1px solid var(--accent-practica);
         }
 
         .brand-subtitle {
@@ -141,8 +145,8 @@
         }
 
         .tab-btn.active {
-            color: var(--primary);
-            border-color: var(--primary);
+            color: #ffffff;
+            border-color: var(--accent-practica);
         }
 
         /* Contenedor Principal Adaptable */
@@ -201,7 +205,7 @@
             padding: 20px;
             border-radius: 16px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
         }
@@ -245,8 +249,8 @@
         }
 
         .radio-option.selected {
-            background-color: #1e1b4b;
-            border-color: var(--primary);
+            background-color: #200f2e;
+            border-color: var(--accent-practica);
         }
 
         .radio-option-title {
@@ -256,13 +260,13 @@
         }
 
         .radio-option.selected .radio-option-title {
-            color: #c084fc;
+            color: #fca5a5;
         }
 
         .radio-option-desc {
             display: block;
             font-size: 11px;
-            color: #64748b;
+            color: var(--text-muted);
             margin-top: 2px;
         }
 
@@ -271,7 +275,7 @@
             padding: 14px;
             background-color: var(--bg-main);
             border-radius: 12px;
-            border: 1px solid #475569;
+            border: 1px solid var(--border-color);
             margin-bottom: 16px;
         }
 
@@ -322,8 +326,13 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.2);
+            box-shadow: 0 4px 20px rgba(213, 60, 60, 0.3);
             transition: all 0.2s;
+        }
+
+        .btn-optimize:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
 
         /* Workspace del Horario */
@@ -391,21 +400,21 @@
             border: 2px dashed var(--border-color);
             border-radius: 16px;
             padding: 40px 20px;
-            color: #64748b;
+            color: var(--text-muted);
             text-align: center;
         }
 
         .placeholder-icon {
             font-size: 28px;
             margin-bottom: 12px;
-            color: #475569;
+            color: var(--primary);
         }
 
         .spinner {
             width: 32px;
             height: 32px;
             border: 3px solid var(--border-color);
-            border-top-color: var(--primary);
+            border-top-color: var(--accent-practica);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin-bottom: 14px;
@@ -433,7 +442,7 @@
         /* Contenedor con Scroll para Celular de la Tabla */
         .timetable-wrapper {
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* Hace el scroll suave en iPhones */
+            -webkit-overflow-scrolling: touch;
             border-radius: 8px;
             border: 1px solid var(--border-color);
         }
@@ -442,11 +451,11 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 11.5px;
-            min-width: 750px; /* Obliga a mantener estructura legible en móviles mediante scroll */
+            min-width: 750px;
         }
 
         th {
-            background-color: var(--bg-card);
+            background-color: var(--bg-darker);
             border-bottom: 2px solid var(--border-color);
             padding: 12px;
             color: #ffffff;
@@ -464,6 +473,7 @@
             vertical-align: top;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
+            background-color: rgba(43, 25, 62, 0.3); /* Mezcla sutil */
         }
 
         .time-cell {
@@ -488,20 +498,21 @@
             display: inline-block;
         }
 
-        .badge-teoria { background-color: var(--badge-teoria); }
-        .badge-practica { background-color: var(--badge-practica); }
+        .badge-teoria { background-color: var(--badge-teoria); border: 1px solid var(--accent-teoria); }
+        .badge-practica { background-color: var(--badge-practica); border: 1px solid var(--accent-practica); }
 
         /* Tarjeta de Curso Asignado */
         .materia-card {
-            background-color: var(--bg-card);
-            padding: 8px;
+            background-color: var(--bg-darker);
+            padding: 10px;
             border-radius: 8px;
             text-align: left;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
         }
 
-        .card-teoria { border-left: 3px solid var(--accent-teoria); }
-        .card-practica { border-left: 3px solid var(--accent-practica); }
+        .card-teoria { border-left: 4px solid var(--accent-teoria); }
+        .card-practica { border-left: 4px solid var(--accent-practica); }
 
         .materia-title {
             color: #ffffff;
@@ -521,17 +532,18 @@
 
         .materia-aula {
             display: inline-block;
-            color: #cbd5e1;
+            color: #ffffff;
             font-size: 8.5px;
             font-weight: 700;
-            background-color: #334155;
-            padding: 1px 5px;
+            background-color: var(--bg-card);
+            padding: 2px 6px;
             border-radius: 4px;
-            margin-top: 5px;
+            margin-top: 6px;
+            border: 1px solid var(--border-color);
         }
 
         .text-libre {
-            color: #475569;
+            color: #553b6e;
             font-size: 11px;
             font-style: italic;
             display: block;
@@ -598,7 +610,7 @@
         <div id="view-panel" class="panel-view">
             <div class="sidebar">
                 <div class="card">
-                    <h3 class="card-title"><i class="fa-solid fa-filter" style="color: var(--primary);"></i> Preferencia de Turno</h3>
+                    <h3 class="card-title"><i class="fa-solid fa-filter" style="color: var(--accent-practica);"></i> Preferencia de Turno</h3>
                     <p class="card-description">Moldee la distribución de las sesiones teórico-prácticas según la disponibilidad.</p>
                     
                     <div class="radio-group">
@@ -630,8 +642,8 @@
                     </button>
                 </div>
 
-                <div class="card" style="padding: 16px; background-color: var(--bg-main);">
-                    <span class="routine-title" style="color: #cbd5e1;"><i class="fa-solid fa-users" style="color: #6366f1;"></i> Restricciones del Algoritmo</span>
+                <div class="card" style="padding: 16px; background-color: var(--bg-darker);">
+                    <span class="routine-title" style="color: #cbd5e1;"><i class="fa-solid fa-users" style="color: var(--accent-practica);"></i> Restricciones del Algoritmo</span>
                     <div style="display: grid; grid-template-columns: 1fr; gap: 4px; font-size: 11px; color: var(--text-muted);">
                         <div>• 16 Profesores Universitarios</div>
                         <div>• 8 Laboratorios y Aulas</div>
@@ -669,7 +681,7 @@
                 </div>
                 <div class="metric-card">
                     <span class="metric-label">Consistencia de Bloque Dual</span>
-                    <div class="metric-value" style="color: #6366f1;">Teoría + Práctica Vinculadas</div>
+                    <div class="metric-value" style="color: var(--accent-teoria);">Teoría + Práctica Vinculadas</div>
                 </div>
             </div>
         </div>
