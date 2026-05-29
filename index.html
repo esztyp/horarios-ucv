@@ -9,19 +9,22 @@
     
     <style>
         :root {
-            /* Nuevos colores basados en tu paleta exacta */
-            --bg-main: #0d050e;              /* Fondo Base Profundo Nocturno */
-            --bg-card: #2b193e;              /* Fondo de Tarjetas Púrpura */
-            --bg-darker: #160a22;            /* Celdas / Secciones más oscuras */
-            --border-color: #492864;         /* Bordes integrados en tonos púrpura */
+            --bg-main: #0d050e;
+            --bg-card: #2b193e;
+            --bg-darker: #160a22;
+            --border-color: #492864;
             --text-main: #f1f5f9;
-            --text-muted: #a38eb6;           /* Texto secundario suavizado con lavanda */
+            --text-muted: #a38eb6;
             
-            /* Colores de Acento y Marcas */
-            --primary: #a3445d;              /* Púrpura claro / Detalles activos */
-            --primary-gradient: linear-gradient(135deg, #8d2d56 0%, #d53c3c 100%); /* Degradado Púrpura Vibrante a Coral */
-            --accent-teoria: #8d2d56;        /* Púrpura Vibrante */
-            --accent-practica: #d53c3c;      /* Coral Intenso */
+            /* Colores temáticos para fondos de turnos por ambiente (Cambio 11) */
+            --bg-ambiente-manana: #3b2314;   /* Tono cálido amanecer / mediodía corto */
+            --bg-ambiente-tarde: #22143b;     /* Tono mediodía / tarde */
+            --bg-ambiente-noche: #09030f;     /* Oscuro profundo noche */
+
+            --primary: #a3445d;
+            --primary-gradient: linear-gradient(135deg, #8d2d56 0%, #d53c3c 100%);
+            --accent-teoria: #8d2d56;
+            --accent-practica: #d53c3c;
             
             --badge-teoria: #4a152d;
             --badge-practica: #5e1616;
@@ -40,27 +43,120 @@
             flex-direction: column;
         }
 
-        /* Navbar Responsiva */
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- 1. PANTALLA DE INICIO DE SESIÓN --- */
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .login-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            text-align: center;
+        }
+
+        .login-logo {
+            font-size: 42px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .login-card h2 {
+            margin: 0 0 6px 0;
+            font-size: 24px;
+        }
+
+        .login-card p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin: 0 0 24px 0;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #cbd5e1;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent-practica);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(213, 60, 60, 0.3);
+            margin-top: 10px;
+        }
+
+        .forgot-password {
+            display: block;
+            margin-top: 16px;
+            font-size: 12.5px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .forgot-password:hover {
+            color: #ffffff;
+        }
+
+        /* --- INTERFAZ PRINCIPAL DEL SISTEMA --- */
         .navbar {
             background-color: rgba(13, 5, 14, 0.85);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
             padding: 14px 24px;
             display: flex;
-            flex-direction: column;
-            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
             position: sticky;
             top: 0;
             z-index: 50;
-        }
-
-        @media (min-width: 768px) {
-            .navbar {
-                padding: 14px 48px;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
         }
 
         .brand {
@@ -104,52 +200,22 @@
             color: var(--text-muted);
         }
 
-        .nav-tabs {
-            display: flex;
-            gap: 20px;
-            font-size: 13px;
-            width: 100%;
-            border-top: 1px solid var(--border-color);
-            padding-top: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .nav-tabs {
-                gap: 36px;
-                font-size: 14px;
-                width: auto;
-                border-top: none;
-                padding-top: 0;
-            }
-        }
-
-        .tab-btn {
-            color: var(--text-muted);
-            cursor: pointer;
+        .btn-logout {
             background: none;
-            border: none;
-            font-weight: 600;
-            padding-bottom: 10px;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-            flex: 1;
-            text-align: center;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12.5px;
+            font-weight: 500;
         }
 
-        @media (min-width: 768px) {
-            .tab-btn {
-                flex: none;
-                padding-bottom: 18px;
-                margin-top: 18px;
-            }
+        .btn-logout:hover {
+            color: white;
+            border-color: #cbd5e1;
         }
 
-        .tab-btn.active {
-            color: #ffffff;
-            border-color: var(--accent-practica);
-        }
-
-        /* Contenedor Principal Adaptable */
         .main-container {
             display: flex;
             flex-direction: column;
@@ -161,30 +227,11 @@
         @media (min-width: 1024px) {
             .main-container {
                 flex-direction: row;
-                padding: 40px;
-                gap: 32px;
+                padding: 30px;
+                gap: 24px;
             }
         }
 
-        .panel-view {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            gap: 20px;
-        }
-
-        @media (min-width: 1024px) {
-            .panel-view {
-                flex-direction: row;
-                gap: 32px;
-            }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Lateral / Superior Control */
         .sidebar {
             width: 100%;
             display: flex;
@@ -196,7 +243,6 @@
             .sidebar {
                 width: 380px;
                 flex-shrink: 0;
-                gap: 24px;
             }
         }
 
@@ -210,10 +256,36 @@
             flex-direction: column;
         }
 
-        @media (min-width: 768px) {
-            .card {
-                padding: 28px;
-            }
+        /* --- 7. PANEL DE CRÉDITOS, CURSOS RESTANTES Y CICLO --- */
+        .academic-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 6px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .summary-label {
+            display: block;
+            font-size: 9.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .summary-value {
+            display: block;
+            font-size: 15px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-top: 4px;
         }
 
         .card-title {
@@ -232,86 +304,64 @@
             line-height: 1.5;
         }
 
-        .radio-group {
+        /* --- 6. CURSOS COMO BASE (CHECKBOXES) Y TURNOS/DÍAS --- */
+        .base-courses-box {
             display: flex;
             flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .course-checkbox-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .course-checkbox-label input {
+            accent-color: var(--accent-practica);
+            width: 16px;
+            height: 16px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 10px;
             margin-bottom: 20px;
         }
 
-        .radio-option {
-            padding: 12px 14px;
-            border-radius: 10px;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: all 0.2s;
+        .select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
-        .radio-option.selected {
-            background-color: #200f2e;
-            border-color: var(--accent-practica);
-        }
-
-        .radio-option-title {
-            display: block;
-            font-size: 12.5px;
-            font-weight: 600;
-        }
-
-        .radio-option.selected .radio-option-title {
-            color: #fca5a5;
-        }
-
-        .radio-option-desc {
-            display: block;
+        .select-group label {
             font-size: 11px;
+            font-weight: 600;
             color: var(--text-muted);
-            margin-top: 2px;
         }
 
-        /* Rutina Personalizada */
-        .custom-routine-box {
-            padding: 14px;
+        .custom-select {
             background-color: var(--bg-main);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 16px;
-        }
-
-        .routine-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #cbd5e1;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .routine-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .routine-row span {
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .routine-select {
-            background-color: var(--bg-card);
             color: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 4px 8px;
-            font-size: 11px;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 12px;
+            font-family: inherit;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        /* Botón de Optimización */
         .btn-optimize {
             width: 100%;
             padding: 14px;
@@ -327,12 +377,6 @@
             justify-content: center;
             gap: 10px;
             box-shadow: 0 4px 20px rgba(213, 60, 60, 0.3);
-            transition: all 0.2s;
-        }
-
-        .btn-optimize:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
         }
 
         /* Workspace del Horario */
@@ -365,33 +409,27 @@
             font-weight: 700;
         }
 
-        @media (min-width: 768px) {
-            .workspace-title {
-                font-size: 18px;
-            }
-        }
-
         .workspace-subtitle {
             margin: 4px 0 0 0;
             font-size: 11.5px;
             color: var(--text-muted);
         }
 
-        .fitness-badge {
+        /* 10. Fitness reemplazado por Ciclo Activo */
+        .ciclo-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background-color: var(--success-bg);
-            border: 1px solid var(--success-border);
+            background-color: #1e1b4b;
+            border: 1px solid #6366f1;
             padding: 6px 14px;
             border-radius: 30px;
-            color: var(--success-text);
+            color: #a5b4fc;
             font-size: 11px;
             font-weight: 700;
             align-self: flex-start;
         }
 
-        /* Estado Inicial / Cargando */
         .placeholder-box {
             display: flex;
             flex-direction: column;
@@ -439,10 +477,8 @@
             line-height: 1.4;
         }
 
-        /* Contenedor con Scroll para Celular de la Tabla */
         .timetable-wrapper {
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
             border-radius: 8px;
             border: 1px solid var(--border-color);
         }
@@ -465,7 +501,7 @@
 
         th.time-col {
             color: #cbd5e1;
-            width: 115px;
+            width: 130px;
         }
 
         td {
@@ -473,19 +509,24 @@
             vertical-align: top;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
-            background-color: rgba(43, 25, 62, 0.3); /* Mezcla sutil */
+            background-color: rgba(43, 25, 62, 0.1);
         }
 
         .time-cell {
             padding: 12px 6px;
-            background-color: var(--bg-darker);
             border-right: 1px solid var(--border-color);
             text-align: center;
+            color: white;
         }
+
+        /* --- 11. CONFIGURACIÓN DE FONDOS POR AMBIENTE HORARIO --- */
+        .ambiente-manana { background-color: var(--bg-ambiente-manana) !important; }
+        .ambiente-mediodia { background-color: var(--bg-ambiente-tarde) !important; }
+        .ambiente-noche { background-color: var(--bg-ambiente-noche) !important; }
 
         .time-range {
             font-weight: 700;
-            font-size: 11.5px;
+            font-size: 11px;
         }
 
         .type-badge {
@@ -501,7 +542,6 @@
         .badge-teoria { background-color: var(--badge-teoria); border: 1px solid var(--accent-teoria); }
         .badge-practica { background-color: var(--badge-practica); border: 1px solid var(--accent-practica); }
 
-        /* Tarjeta de Curso Asignado */
         .materia-card {
             background-color: var(--bg-darker);
             padding: 10px;
@@ -509,6 +549,7 @@
             text-align: left;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border-color);
+            margin-bottom: 6px;
         }
 
         .card-teoria { border-left: 4px solid var(--accent-teoria); }
@@ -542,301 +583,294 @@
             border: 1px solid var(--border-color);
         }
 
-        .text-libre {
+        /* 5. Cambio libre por Free */
+        .text-free {
             color: #553b6e;
             font-size: 11px;
             font-style: italic;
             display: block;
             margin-top: 12px;
         }
-
-        /* Sección Reportes Responsiva */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        @media (min-width: 640px) {
-            .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-        }
-
-        .metric-card {
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            border-radius: 12px;
-            background-color: var(--bg-main);
-        }
-
-        .metric-label {
-            font-size: 11.5px;
-            color: var(--text-muted);
-        }
-
-        .metric-value {
-            font-size: 20px;
-            font-weight: 800;
-            margin-top: 6px;
-        }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="brand">
-            <div class="brand-icon">
-                <i class="fa-solid fa-layer-group"></i>
+    <div id="auth-screen" class="login-container">
+        <div class="login-card">
+            <div class="login-logo"><i class="fa-solid fa-layer-group"></i></div>
+            <h2>Portal de Acceso</h2>
+            <p>Ingresa tus credenciales universitarias</p>
+            
+            <div class="input-group">
+                <label>Documento Nacional de Identidad (DNI)</label>
+                <input type="text" id="login-dni" placeholder="Escribe tu DNI">
             </div>
-            <div>
-                <div class="brand-title">
-                    OptimaClass Pro <span class="brand-badge">v2.0</span>
-                </div>
-                <span class="brand-subtitle">Estructura de Bloques Duales (Teoría / Práctica)</span>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" id="login-password" placeholder="••••••••">
             </div>
+            
+            <button class="btn-login" onclick="procesarLogin()">Iniciar Sesión</button>
+            <a href="#" class="forgot-password" onclick="alert('Enlace de recuperación enviado al correo institucional registrado.')">¿Olvidaste tu contraseña?</a>
         </div>
-        
-        <div class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab('panel')">Simulador</button>
-            <button class="tab-btn" onclick="switchTab('reportes')">Métricas</button>
-        </div>
-    </nav>
+    </div>
 
-    <div class="main-container">
-        
-        <div id="view-panel" class="panel-view">
+    <div id="app-screen" class="hidden">
+        <nav class="navbar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <div class="brand-title">
+                        OptimaClass Pro <span class="brand-badge">Beta</span>
+                    </div>
+                    <span class="brand-subtitle">Planificación de Cursos con Estructura Dual (Teoría y Práctica)</span>
+                </div>
+            </div>
+            <button class="btn-logout" onclick="procesarLogout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Salir</button>
+        </nav>
+
+        <div class="main-container">
             <div class="sidebar">
                 <div class="card">
-                    <h3 class="card-title"><i class="fa-solid fa-filter" style="color: var(--accent-practica);"></i> Preferencia de Turno</h3>
-                    <p class="card-description">Moldee la distribución de las sesiones teórico-prácticas según la disponibilidad.</p>
-                    
-                    <div class="radio-group">
-                        <div class="radio-option selected" onclick="selectTurno('mañana', this)">
-                            <span class="radio-option-title">Turno Mañana (Fijo)</span>
-                            <span class="radio-option-desc">Teoría: 07:30-10:00 | Práctica: 10:20-12:00</span>
+                    <div class="academic-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">Pendientes</span>
+                            <span class="summary-value" id="res-creditos">22</span>
                         </div>
-                        <div class="radio-option" onclick="selectTurno('tarde', this)">
-                            <span class="radio-option-title">Turno Tarde (Fijo)</span>
-                            <span class="radio-option-desc">Teoría: 14:00-16:30 | Práctica: 16:50-18:30</span>
+                        <div class="summary-item">
+                            <span class="summary-label">Restantes</span>
+                            <span class="summary-value" id="res-cursos">5</span>
                         </div>
-                        <div class="radio-option" onclick="selectTurno('noche', this)">
-                            <span class="radio-option-title">Turno Noche (Fijo)</span>
-                            <span class="radio-option-desc">Teoría: 19:00-21:30 | Práctica: 21:50-23:30</span>
-                        </div>
-                        <div class="radio-option" onclick="selectTurno('personalizado', this)">
-                            <span class="radio-option-title">Configuración Libre por Día</span>
-                            <span class="radio-option-desc">Alternar turnos a lo largo de la semana</span>
+                        <div class="summary-item">
+                            <span class="summary-label">Ciclo Selecc.</span>
+                            <span class="summary-value" id="res-ciclo">I</span>
                         </div>
                     </div>
 
-                    <div id="custom-routine-section" class="custom-routine-box hidden">
-                        <span class="routine-title"><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Rutina Personalizada:</span>
-                        <div id="routine-rows-container"></div>
+                    <h3 class="card-title"><i class="fa-solid fa-book-bookmark" style="color: var(--accent-practica);"></i> 6. Cursos Base</h3>
+                    <p class="card-description">Selecciona los cursos que estructurarán el horario (Máximo 5 habilitados, incluye Inglés obligatoriamente).</p>
+                    
+                    <div class="base-courses-box">
+                        <label class="course-checkbox-label">
+                            <span>Estructuras de Datos (T/P)</span>
+                            <input type="checkbox" class="course-selector" value="0" checked disabled>
+                        </label>
+                        <label class="course-checkbox-label">
+                            <span>Bases de Datos I (T/P)</span>
+                            <input type="checkbox" class="course-selector" value="1" checked disabled>
+                        </label>
+                        <label class="course-checkbox-label">
+                            <span>Ingeniería de Software (T/P)</span>
+                            <input type="checkbox" class="course-selector" value="2" checked disabled>
+                        </label>
+                        <label class="course-checkbox-label">
+                            <span>Inteligencia Artificial (T/P)</span>
+                            <input type="checkbox" class="course-selector" value="3" checked disabled>
+                        </label>
+                        <label class="course-checkbox-label">
+                            <span>Inglés Técnico Avanzado (T/P)</span>
+                            <input type="checkbox" class="course-selector" value="4" checked disabled>
+                        </label>
+                    </div>
+
+                    <h3 class="card-title"><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Alternativas de Rutina</h3>
+                    <div class="options-grid">
+                        <div class="select-group">
+                            <label>Día Preferente</label>
+                            <select id="pref-dia" class="custom-select">
+                                <option value="Todos">Cargar Semana Completa</option>
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                            </select>
+                        </div>
+                        <div class="select-group">
+                            <label>Turno Base Alternativo</label>
+                            <select id="pref-turno" class="custom-select">
+                                <option value="manana">Ambiente Mañana (07:30 - 12:00)</option>
+                                <option value="mediodia">Ambiente Mediodía (13:30 - 17:50)</option>
+                                <option value="noche">Ambiente Noche (18:10 - 22:30)</option>
+                            </select>
+                        </div>
+                        <div class="select-group">
+                            <label>Ciclo Académico</label>
+                            <select id="pref-ciclo" class="custom-select" onchange="actualizarCiclo(this.value)">
+                                <option value="I">Ciclo I</option>
+                                <option value="II">Ciclo II</option>
+                                <option value="III">Ciclo III</option>
+                            </select>
+                        </div>
                     </div>
 
                     <button class="btn-optimize" onclick="iniciarOptimizacion()">
-                        <i class="fa-solid fa-play"></i> Optimizar y Cuadrar
+                        <i class="fa-solid fa-calendar-check"></i> Asignar y Generar Horario
                     </button>
-                </div>
-
-                <div class="card" style="padding: 16px; background-color: var(--bg-darker);">
-                    <span class="routine-title" style="color: #cbd5e1;"><i class="fa-solid fa-users" style="color: var(--accent-practica);"></i> Restricciones del Algoritmo</span>
-                    <div style="display: grid; grid-template-columns: 1fr; gap: 4px; font-size: 11px; color: var(--text-muted);">
-                        <div>• 16 Profesores Universitarios</div>
-                        <div>• 8 Laboratorios y Aulas</div>
-                        <div>• Control de Colisiones Genéticas</div>
-                    </div>
                 </div>
             </div>
 
             <div class="card workspace">
                 <div class="workspace-header">
                     <div>
-                        <h2 class="workspace-title">Malla Semanal Balanceada</h2>
-                        <p class="workspace-subtitle">Asignación de cargas lectivas teóricas y prácticas.</p>
+                        <h2 class="workspace-title" id="cambio-titulo">Horario Semanal</h2>
+                        <p class="workspace-subtitle">Asignación de cursos y distribución horaria dual.</p>
                     </div>
-                    <div id="fitness-badge-container" class="hidden"></div>
+                    <div id="ciclo-badge-container" class="ciclo-badge">
+                        <i class="fa-solid fa-graduation-cap"></i> Ciclo Activo: I
+                    </div>
                 </div>
 
                 <div id="timetable-content" class="workspace-body">
                     <div class="placeholder-box">
-                        <i class="fa-solid fa-wave-square placeholder-icon"></i>
-                        <p style="margin: 0; font-size: 13px; font-weight: 600; color: #cbd5e1;">Simulador Listo</p>
-                        <p style="margin: 4px 0 0 0; font-size: 11px;">Haga clic en 'Optimizar y Cuadrar' para verificar el viernes.</p>
+                        <i class="fa-solid fa-calendar-days placeholder-icon"></i>
+                        <p style="margin: 0; font-size: 13px; font-weight: 600; color: #cbd5e1;">Horario Vacío</p>
+                        <p style="margin: 4px 0 0 0; font-size: 11px;">Configure sus alternativas y presione 'Asignar y Generar Horario'.</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div id="view-reportes" class="card workspace hidden">
-            <h2 class="workspace-title">Métricas Operacionales</h2>
-            <p class="workspace-subtitle">Monitoreo de aptitud de la población cromosómica.</p>
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <span class="metric-label">Distribución de Carga en Viernes</span>
-                    <div class="metric-value" style="color: var(--success-text);">Activo (100% Homogéneo)</div>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-label">Consistencia de Bloque Dual</span>
-                    <div class="metric-value" style="color: var(--accent-teoria);">Teoría + Práctica Vinculadas</div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <script>
-        let turnoPreferencia = 'mañana';
         const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
-        let prefPorDia = { Lunes: 'Mañana', Martes: 'Mañana', Miércoles: 'Mañana', Jueves: 'Mañana', Viernes: 'Mañana' };
-        let resultadoGlobal = null;
 
+        // 9. Modificación de nombres de bloques y 12. Nuevos Rangos Horarios incorporados
         const bloquesHorarios = [
-            { id: 'M1', rango: '07:30 - 10:00', turno: 'Mañana', tipo: 'Teoría' },
-            { id: 'M2', rango: '10:20 - 12:00', turno: 'Mañana', tipo: 'Práctica' },
-            { id: 'T1', rango: '14:00 - 16:30', turno: 'Tarde', tipo: 'Teoría' },
-            { id: 'T2', rango: '16:50 - 18:30', turno: 'Tarde', tipo: 'Práctica' },
-            { id: 'N1', rango: '19:00 - 21:30', turno: 'Noche', tipo: 'Teoría' },
-            { id: 'N2', rango: '21:50 - 23:30', turno: 'Noche', tipo: 'Práctica' },
+            { id: 'B1_M', rango: '07:30 - 09:30', ambiente: 'ambiente-manana', nombreBloque: 'Bloque Alfa (Mañana)', tipo: 'Teoría' },
+            { id: 'B2_M', rango: '09:40 - 12:00', ambiente: 'ambiente-manana', nombreBloque: 'Bloque Beta (Mañana)', tipo: 'Práctica' },
+            { id: 'B1_T', rango: '13:30 - 15:30', ambiente: 'ambiente-mediodia', nombreBloque: 'Bloque Sigma (Mediodía)', tipo: 'Teoría' },
+            { id: 'B2_T', rango: '15:40 - 17:50', ambiente: 'ambiente-mediodia', nombreBloque: 'Bloque Omega (Mediodía)', tipo: 'Práctica' },
+            { id: 'B1_N', rango: '18:10 - 20:10', ambiente: 'ambiente-noche', nombreBloque: 'Bloque Delta (Noche)', tipo: 'Teoría' },
+            { id: 'B2_N', rango: '20:20 - 22:30', ambiente: 'ambiente-noche', nombreBloque: 'Bloque Gamma (Noche)', tipo: 'Práctica' },
         ];
 
-        const container = document.getElementById('routine-rows-container');
-        diasSemana.forEach(dia => {
-            const row = document.createElement('div');
-            row.className = 'routine-row';
-            row.innerHTML = `
-                <span>${dia}:</span>
-                <select class="routine-select" onchange="handlePrefDiaChange('${dia}', this.value)">
-                    <option value="Mañana">Mañana</option>
-                    <option value="Tarde">Tarde</option>
-                    <option value="Noche">Noche</option>
-                </select>
-            `;
-            container.appendChild(row);
-        });
+        // 4. Exactamente 5 cursos fijos con subcomponentes teóricos y prácticos configurados de base
+        const poolMaterias = [
+            { nombre: 'Estructuras de Datos', profrs: ['Dr. Alan Turing', 'Ing. Grace Hopper'], aulas: ['Lab 301', 'Aul 102'] },
+            { nombre: 'Bases de Datos I', profrs: ['Dra. Edgar Codd', 'Ing. Larry Ellison'], aulas: ['Lab 304', 'Aul 105'] },
+            { nombre: 'Ingeniería de Software', profrs: ['Mgtr. Roger Pressman', 'Dra. Margaret Hamilton'], aulas: ['Aul 501', 'Aul 502'] },
+            { nombre: 'Inteligencia Artificial', profrs: ['Dr. Geoffrey Hinton', 'Dr. Yann LeCun'], aulas: ['Lab AI-1', 'Lab AI-2'] },
+            { nombre: 'Inglés Técnico Avanzado', profrs: ['Prof. Lingua Franca', 'Mgtr. Oxford Team'], aulas: ['Aul Idiomas', 'Virtual 02'] }
+        ];
 
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        // 1. Lógica de Control de Sesión
+        function procesarLogin() {
+            const dni = document.getElementById('login-dni').value.trim();
+            const pass = document.getElementById('login-password').value.trim();
 
-            if(tab === 'panel') {
-                document.getElementById('view-panel').classList.remove('hidden');
-                document.getElementById('view-reportes').classList.add('hidden');
+            if (dni === '' || pass === '') {
+                alert('Por favor ingrese su DNI y contraseña.');
+                return;
+            }
+            
+            document.getElementById('auth-screen').classList.add('hidden');
+            document.getElementById('app-screen').classList.remove('hidden');
+        }
+
+        function procesarLogout() {
+            document.getElementById('login-dni').value = '';
+            document.getElementById('login-password').value = '';
+            document.getElementById('app-screen').classList.add('hidden');
+            document.getElementById('auth-screen').classList.remove('hidden');
+        }
+
+        // 10. Actualización dinámica del ciclo y sus metadatos correspondientes
+        function actualizarCiclo(valor) {
+            document.getElementById('res-ciclo').innerText = valor;
+            document.getElementById('ciclo-badge-container').innerHTML = `<i class="fa-solid fa-graduation-cap"></i> Ciclo Activo: ${valor}`;
+            
+            if(valor === 'I') {
+                document.getElementById('res-creditos').innerText = '22';
+                document.getElementById('res-cursos').innerText = '5';
+            } else if(valor === 'II') {
+                document.getElementById('res-creditos').innerText = '44';
+                document.getElementById('res-cursos').innerText = '4';
             } else {
-                document.getElementById('view-panel').classList.add('hidden');
-                document.getElementById('view-reportes').classList.remove('hidden');
+                document.getElementById('res-creditos').innerText = '60';
+                document.getElementById('res-cursos').innerText = '5';
             }
         }
 
-        function selectTurno(turno, elemento) {
-            document.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
-            elemento.classList.add('selected');
-            turnoPreferencia = turno;
-
-            const customBox = document.getElementById('custom-routine-section');
-            if(turno === 'personalizado') {
-                customBox.classList.remove('hidden');
-            } else {
-                customBox.classList.add('hidden');
-            }
-        }
-
-        function handlePrefDiaChange(dia, valor) {
-            prefPorDia[dia] = valor;
-        }
-
+        // Motor de renderizado del Horario
         function iniciarOptimizacion() {
             const contentDiv = document.getElementById('timetable-content');
-            const fitnessContainer = document.getElementById('fitness-badge-container');
+            const diaFiltrado = document.getElementById('pref-dia').value;
+            const turnoFiltrado = document.getElementById('pref-turno').value;
             
-            fitnessContainer.classList.add('hidden');
             contentDiv.innerHTML = `
                 <div class="placeholder-box">
                     <div class="spinner"></div>
-                    <p style="margin: 0; font-size: 12px;">Balanceando asignaciones genéticas...</p>
+                    <p style="margin: 0; font-size: 12px;">Procesando asignación y distribuciones del Horario Semanal...</p>
                 </div>
             `;
 
             setTimeout(() => {
-                const poolMaterias = [
-                    { nombre: 'Estructuras de Datos', profrs: ['Dr. Alan Turing', 'Ing. Grace Hopper'], aulas: ['Lab 301', 'Aul 102'] },
-                    { nombre: 'Prog. Orientada a Objetos', profrs: ['Ing. James Gosling', 'Mgtr. Bjarne Stroustrup'], aulas: ['Lab 302', 'Aul 204'] },
-                    { nombre: 'Bases de Datos I', profrs: ['Dra. Edgar Codd', 'Ing. Larry Ellison'], aulas: ['Lab 304', 'Aul 105'] },
-                    { nombre: 'Ingeniería de Software', profrs: ['Mgtr. Roger Pressman', 'Dra. Margaret Hamilton'], aulas: ['Aul 501', 'Aul 502'] },
-                    { nombre: 'Inteligencia Artificial', profrs: ['Dr. Geoffrey Hinton', 'Dr. Yann LeCun'], aulas: ['Lab AI-1', 'Lab AI-2'] },
-                    { nombre: 'Redes y Conectividad', profrs: ['Ing. Vint Cerf', 'Mgtr. Andrew Tanenbaum'], aulas: ['Lab Redes', 'Aul 201'] },
-                    { nombre: 'Cálculo Vectorial', profrs: ['Lic. Isaac Newton', 'Dr. Gottfried Leibniz'], aulas: ['Aul 101', 'Aul 103'] },
-                    { nombre: 'Metodología de la Inv.', profrs: ['Dr. Mario Bunge', 'Dra. Marie Curie'], aulas: ['Aul 402', 'Aul 405'] }
-                ];
-
                 let asignaciones = [];
 
+                // Generación controlada: mapea los 5 cursos secuencialmente cruzando componentes de Teoría y Práctica
                 diasSemana.forEach((dia, index) => {
-                    let turnoDeseado = turnoPreferencia === 'personalizado' ? prefPorDia[dia] : turnoPreferencia;
-                    const bloquesDelDia = bloquesHorarios.filter(b => b.turno.toLowerCase() === turnoDeseado.toLowerCase());
-                    
-                    let indicesMaterias = [];
-                    if (index === 0) indicesMaterias = [0, 1]; 
-                    if (index === 1) indicesMaterias = [2, 3]; 
-                    if (index === 2) indicesMaterias = [4, 5]; 
-                    if (index === 3) indicesMaterias = [6];    
-                    if (index === 4) indicesMaterias = [7];    
+                    if (diaFiltrado !== 'Todos' && diaFiltrado !== dia) return;
 
-                    bloquesDelDia.forEach((bloque) => {
-                        let materiaIndex = bloque.tipo === 'Teoría' ? indicesMaterias[0] : (indicesMaterias[1] !== undefined ? indicesMaterias[1] : indicesMaterias[0]);
+                    // 4. Se permite cruzar o colocar múltiples cursos en el mismo día indexando dinámicamente
+                    let materiaTeoriaIndex = index % poolMaterias.length;
+                    let materiaPracticaIndex = (index + 1) % poolMaterias.length;
+
+                    bloquesHorarios.forEach((bloque) => {
+                        let cursoAsignado = bloque.tipo === 'Teoría' ? poolMaterias[materiaTeoriaIndex] : poolMaterias[materiaPracticaIndex];
                         
-                        if (materiaIndex !== undefined && materiaIndex < poolMaterias.length) {
-                            const mat = poolMaterias[materiaIndex];
-                            const prof = mat.profrs[Math.floor(Math.random() * mat.profrs.length)];
-                            const aula = mat.aulas[Math.floor(Math.random() * mat.aulas.length)];
+                        const prof = cursoAsignado.profrs[Math.floor(Math.random() * cursoAsignado.profrs.length)];
+                        const aula = cursoAsignado.aulas[Math.floor(Math.random() * cursoAsignado.aulas.length)];
 
-                            asignaciones.push({
-                                dia,
-                                bloqueId: bloque.id,
-                                materia: mat.nombre,
-                                profesor: prof,
-                                aula: aula,
-                                tipo: bloque.tipo
-                            });
-                        }
+                        asignaciones.push({
+                            dia,
+                            bloqueId: bloque.id,
+                            materia: cursoAsignado.nombre,
+                            profesor: prof,
+                            aula: aula,
+                            tipo: bloque.tipo
+                        });
                     });
                 });
 
-                resultadoGlobal = asignaciones;
-
-                const fitnessVal = turnoPreferencia === 'personalizado' ? '0.994' : '1.000';
-                fitnessContainer.className = 'fitness-badge';
-                fitnessContainer.innerHTML = `<i class="fa-solid fa-award"></i> Fitness: ${fitnessVal}`;
-
                 let tablaHTML = `
                     <div class="success-banner">
-                        <i class="fa-solid fa-circle-check"></i> Distribución completada. Bloques de Teoría (2.5h) y Práctica (1.6h) activos.
+                        <i class="fa-solid fa-circle-check"></i> Horario Semanal estructurado con éxito. Bloques cargados bajo métricas duales.
                     </div>
                     <div class="timetable-wrapper">
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="time-col">Franja Horaria</th>
-                                    ${diasSemana.map(d => `<th>${d}</th>`).join('')}
+                                    <th class="time-col">Franja / Bloque</th>
+                                    ${diasSemana.map(d => (diaFiltrado === 'Todos' || diaFiltrado === d) ? `<th>${d}</th>` : '').join('')}
                                 </tr>
                             </thead>
                             <tbody>
                 `;
 
                 bloquesHorarios.forEach(bloque => {
+                    // 11. Determina la inyección de clases de ambiente para los fondos independientes
+                    let claseAmbiente = '';
+                    if (bloque.ambiente === 'ambiente-manana') claseAmbiente = 'ambiente-manana';
+                    if (bloque.ambiente === 'ambiente-mediodia') claseAmbiente = 'ambiente-mediodia';
+                    if (bloque.ambiente === 'ambiente-noche') claseAmbiente = 'ambiente-noche';
+
                     tablaHTML += `<tr>
-                        <td class="time-cell">
+                        <td class="time-cell ${claseAmbiente}">
                             <div class="time-range">${bloque.rango}</div>
+                            <div style="font-size:8.5px; opacity:0.8; margin-top:2px; font-weight:500;">${bloque.nombreBloque}</div>
                             <span class="type-badge ${bloque.tipo === 'Teoría' ? 'badge-teoria' : 'badge-practica'}">${bloque.tipo}</span>
                         </td>
                     `;
 
                     diasSemana.forEach(dia => {
-                        const celda = resultadoGlobal.find(r => r.dia === dia && r.bloqueId === bloque.id);
+                        if (diaFiltrado !== 'Todos' && diaFiltrado !== dia) return;
+
+                        const celda = asignaciones.find(r => r.dia === dia && r.bloqueId === bloque.id);
                         tablaHTML += `<td>`;
+                        
                         if(celda) {
                             tablaHTML += `
                                 <div class="materia-card ${celda.tipo === 'Teoría' ? 'card-teoria' : 'card-practica'}">
@@ -846,7 +880,8 @@
                                 </div>
                             `;
                         } else {
-                            tablaHTML += `<span class="text-libre">Libre</span>`;
+                            // 5. Cambio de texto libre por Free
+                            tablaHTML += `<span class="text-free">Free</span>`;
                         }
                         tablaHTML += `</td>`;
                     });
@@ -857,7 +892,7 @@
                 tablaHTML += `</tbody></table></div>`;
                 contentDiv.innerHTML = tablaHTML;
 
-            }, 1000);
+            }, 700);
         }
     </script>
 </body>
